@@ -10,13 +10,22 @@ from models import Course, Lesson, CourseChunk
 class RAGSystem:
     """Main orchestrator for the Retrieval-Augmented Generation system"""
     
-    def __init__(self, config):
+    def __init__(self, config, model="openrouter/free"):
         self.config = config
         
         # Initialize core components
         self.document_processor = DocumentProcessor(config.CHUNK_SIZE, config.CHUNK_OVERLAP)
-        self.vector_store = VectorStore(config.CHROMA_PATH, config.EMBEDDING_MODEL, config.MAX_RESULTS)
-        self.ai_generator = AIGenerator(config.ANTHROPIC_API_KEY, config.ANTHROPIC_MODEL)
+        self.vector_store = VectorStore(config.CHROMA_PATH, config, config.MAX_RESULTS)
+        # Use OpenRouter if available, otherwise fallback to Anthropic
+        if hasattr(config, 'OPENROUTER_API_KEY') and config.OPENROUTER_API_KEY:
+            self.ai_generator = AIGenerator(
+                config.OPENROUTER_API_KEY,
+                config.OPENROUTER_MODEL,
+                base_url="https://openrouter.ai/api/v1"
+            )
+        else:
+            self.ai_generator = AIGenerator(config.ANTHROPIC_API_KEY, config.ANTHROPIC_MODEL)
+
         self.session_manager = SessionManager(config.MAX_HISTORY)
         
         # Initialize search tools

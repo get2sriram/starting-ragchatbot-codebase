@@ -5,6 +5,10 @@ from dataclasses import dataclass
 from models import Course, CourseChunk
 from sentence_transformers import SentenceTransformer
 
+import os
+os.environ['CURL_CA_BUNDLE'] = ''
+os.environ['REQUESTS_CA_BUNDLE'] = ''
+
 @dataclass
 class SearchResults:
     """Container for search results with metadata"""
@@ -34,7 +38,7 @@ class SearchResults:
 class VectorStore:
     """Vector storage using ChromaDB for course content and metadata"""
     
-    def __init__(self, chroma_path: str, embedding_model: str, max_results: int = 5):
+    def __init__(self, chroma_path: str, config, max_results: int = 5):
         self.max_results = max_results
         # Initialize ChromaDB client
         self.client = chromadb.PersistentClient(
@@ -42,9 +46,10 @@ class VectorStore:
             settings=Settings(anonymized_telemetry=False)
         )
         
-        # Set up sentence transformer embedding function
+        # Use local sentence-transformer for embeddings (reliable, no API dependency)
         self.embedding_function = chromadb.utils.embedding_functions.SentenceTransformerEmbeddingFunction(
-            model_name=embedding_model
+            model_name=config.EMBEDDING_MODEL,
+            device="cpu"
         )
         
         # Create collections for different types of data
