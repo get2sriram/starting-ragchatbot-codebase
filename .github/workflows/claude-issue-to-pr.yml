@@ -24,6 +24,6 @@ jobs:
           prompt: "Implement the feature or fix requested in this issue and open a pull request."
         env:
           ANTHROPIC_BASE_URL: https://openrouter.ai/api
-          # Use a model that doesn't trigger context management features
-          # Avoid newer models that may require unsupported Anthropic features
-          ANTHROPIC_MODEL: anthropic/claude-3.5-sonnet
+          # Use a model that avoids context management features
+          # Some models via OpenRouter may not fully support Anthropic-specific features
+          ANTHROPIC_MODEL: anthropic/claude-sonnet-4.6
