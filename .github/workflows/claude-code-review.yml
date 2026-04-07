@@ -1,6 +1,10 @@
 name: Claude Code Review
 on: [pull_request]
 
+permissions:
+  id-token: write   # Required for OIDC token in Claude Code action
+  contents: read    # Required for checkout
+
 jobs:
   review:
     runs-on: ubuntu-latest
