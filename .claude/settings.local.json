@@ -1,14 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find .:*)",
-      "Bash(chmod +x:*)",
-      "Bash(./scripts/install_dev.sh:*)",
-      "Bash(uv pip:*)",
-      "Bash(uv run:*)",
-      "Bash(./scripts/format.sh:*)",
-      "Bash(git add:*)",
-      "Bash(git status:*)"
+      "Bash(python -m unittest tests.test_rag_system -v)",
+      "Bash(python debug_test.py)",
+      "Bash(git merge:*)",
+      "Bash(git worktree:*)",
+      "Bash(git add:*)"
     ]
   }
 }
