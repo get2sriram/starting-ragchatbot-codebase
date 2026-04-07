@@ -18,5 +18,6 @@ jobs:
         env:
           # Point to OpenRouter's Anthropic-compatible endpoint
           ANTHROPIC_BASE_URL: https://openrouter.ai/api
-          # Optional: Specify which OpenRouter model to use (default is often Sonnet)
-          ANTHROPIC_MODEL: minimax/minimax-m2.5:free
+          # Use a model that doesn't trigger context management features
+          # Avoid newer models that may require unsupported Anthropic features
+          ANTHROPIC_MODEL: anthropic/claude-3.5-sonnet
