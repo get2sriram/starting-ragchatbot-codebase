@@ -38,6 +38,12 @@ function setupEventListeners() {
             sendMessage();
         });
     });
+
+    // NEW CHAT button
+    const newChatButton = document.querySelector('.new-chat-button');
+    if (newChatButton) {
+        newChatButton.addEventListener('click', createNewSession);
+    }
 }
 
 
@@ -125,7 +131,9 @@ function addMessage(content, type, sources = null, isWelcome = false) {
         html += `
             <details class="sources-collapsible">
                 <summary class="sources-header">Sources</summary>
-                <div class="sources-content">${sources.join(', ')}</div>
+                <div class="sources-content">${sources
+                    .map(source => typeof source === 'object' ? source.display : source)
+                    .join(', ')}</div>
             </details>
         `;
     }
