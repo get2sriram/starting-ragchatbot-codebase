@@ -5,7 +5,10 @@
       "Bash(python debug_test.py)",
       "Bash(git merge:*)",
       "Bash(git worktree:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git status:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
