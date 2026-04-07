@@ -7,7 +7,7 @@ permissions:
   id-token: write   # Required for OIDC token in Claude Code action
   contents: write   # Required to create branches and push code
   pull-requests: write  # Required to open the PR
-  issues: read          # Required to read the issue context
+  issues: write          # Required to read the issue context
 
 jobs:
   claude-worker:
@@ -19,6 +19,7 @@ jobs:
       - name: Run Claude Code
         uses: anthropics/claude-code-action@v1
         with:
+          show_full_output: true
           anthropic_api_key: ${{ secrets.OPENROUTER_API_KEY }}
           # Explicitly instruct Claude to implement the issue and open a PR
           prompt: "Implement the feature or fix requested in this issue and open a pull request."
