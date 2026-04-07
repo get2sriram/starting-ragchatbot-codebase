@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find .:*)",
+      "Bash(chmod +x:*)",
+      "Bash(./scripts/install_dev.sh:*)",
+      "Bash(uv pip:*)",
+      "Bash(uv run:*)",
+      "Bash(./scripts/format.sh:*)",
+      "Bash(git add:*)",
+      "Bash(git status:*)"
+    ]
+  }
+}
