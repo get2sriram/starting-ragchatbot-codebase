@@ -14,10 +14,4 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           # Pass OpenRouter key as the primary API key
-          anthropic_api_key: ${{ secrets.OPENROUTER_API_KEY }}
-        env:
-          # Point to OpenRouter's Anthropic-compatible endpoint
-          ANTHROPIC_BASE_URL: https://openrouter.ai/api
-          # Use a model that avoids context management features
-          # Some models via OpenRouter may not fully support Anthropic-specific features
-          ANTHROPIC_MODEL: anthropic/claude-sonnet-4.6
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
